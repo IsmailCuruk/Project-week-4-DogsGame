@@ -1,10 +1,9 @@
 import React, {Component} from 'react'
 import request from 'superagent'
 import DogsList from './DogsList'
+import {connect} from 'react-redux'
 
-export default class DogsListContainer extends Component {
-  state = { dogBreeds: null }
-
+class DogsListContainer extends Component {
   componentDidMount() {
     request
       .get('https://dog.ceo/api/breeds/list/all')
@@ -17,12 +16,26 @@ export default class DogsListContainer extends Component {
   }
 
   updateBreeds(breeds) {
-    this.setState({
-      dogBreeds: breeds
+    // this.setState({
+    //   dogBreeds: breeds
+    // })
+    // dispatch an action
+
+    this.props.dispatch({
+      type: "SET_BREEDS",
+      payload: breeds
     })
   }
 
   render() {
-    return <DogsList dogBreeds={this.state.dogBreeds} />
+    return <DogsList dogBreeds={this.props.dogBreeds} />
   }
 }
+
+const mapStateToProps = function (state){
+  return {
+    dogs: state.dogBreeds
+  }
+}
+
+export default connect(mapStateToProps)(DogsListContainer);

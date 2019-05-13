@@ -8,11 +8,11 @@ import DogBreedImages from './components/DogBreedImages';
 import { Link } from 'react-router-dom';
 import DogBreedImagesContainer from './components/DogBreedImagesContainer';
 import Provider from 'react-redux';
-import { Connect } from 'react-redux';
-import { connect } from 'http2';
+import { connect } from 'react-redux';
+import store from '../src/store'
 
 
-class App extends React.Component {
+export default class App extends React.Component {
 
   render() {
     return (
@@ -32,5 +32,3 @@ class App extends React.Component {
     );
   }
 }
-
-export default connect(mapStateToProps)(App);
