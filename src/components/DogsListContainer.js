@@ -2,6 +2,11 @@ import React, {Component} from 'react'
 import request from 'superagent'
 import DogsList from './DogsList'
 import {connect} from 'react-redux'
+import {setBreeds} from '../actions/SET_BREEDS'
+
+const sleep = time => new Promise(
+  resolve => setTimeout(() => resolve(`I waited for ${time} ms`), time)
+)
 
 class DogsListContainer extends Component {
   componentDidMount() {
@@ -9,23 +14,12 @@ class DogsListContainer extends Component {
       .get('https://dog.ceo/api/breeds/list/all')
       .then(response => {
         const breeds = Object.keys(response.body.message)
-        console.log(response.body.message)
-        this.updateBreeds(breeds)
+        console.log(response)
+        this.props.setBreeds(breeds)
       })
       .catch(console.error)
   }
 
-  updateBreeds(breeds) {
-    // this.setState({
-    //   dogBreeds: breeds
-    // })
-    // dispatch an action
-
-    this.props.dispatch({
-      type: "SET_BREEDS",
-      payload: breeds
-    })
-  }
 
   render() {
     return <DogsList dogBreeds={this.props.dogBreeds} />
@@ -34,8 +28,8 @@ class DogsListContainer extends Component {
 
 const mapStateToProps = function (state){
   return {
-    dogs: state.dogBreeds
+    dogBreeds: state.dogBreeds
   }
 }
 
-export default connect(mapStateToProps)(DogsListContainer);
+export default connect(mapStateToProps, {setBreeds})(DogsListContainer);

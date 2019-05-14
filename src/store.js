@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import reducer from './reducers/index.js';
 import { createStore } from 'redux';
 

@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import {connect} from 'react-redux'
 
-export default class DogBreedImages extends React.Component {
+
+class DogBreedImages extends React.Component {
     render(){
 
         return (
@@ -20,3 +22,4 @@ export default class DogBreedImages extends React.Component {
     }
 }
 
+export default connect()(DogBreedImages);

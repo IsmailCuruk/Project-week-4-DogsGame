@@ -1,8 +1,8 @@
-import request from 'superagent';
 import { Link } from 'react-router-dom'
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
 
-export default class DogsList extends Component {
+class DogsList extends Component {
   renderDogBreed(breed) {
     return <li key={breed}>
     <Link to={ `/dog-breeds/${breed}` }>{breed}</Link>
@@ -14,7 +14,7 @@ export default class DogsList extends Component {
     return (
       <div className="dogs-list">
         <h1>Dogs List</h1>
-
+        
         { !dogBreeds && 'Loading...' }
 
         {
@@ -25,3 +25,5 @@ export default class DogsList extends Component {
     )
   }
 }
+
+export default connect()(DogsList);

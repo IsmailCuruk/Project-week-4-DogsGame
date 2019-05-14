@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import DogBreedImages from './DogBreedImages'
 import request from 'superagent'
 import {connect} from 'react-redux'
+import {setImages} from '../actions/SET_IMAGES'
 
 class DogsListContainer extends Component {
   state = { images: null }
@@ -10,19 +11,14 @@ class DogsListContainer extends Component {
     const breed = this.props.match.params.breed
     request
       .get(`https://dog.ceo/api/breed/${encodeURIComponent(breed)}/images`)
-      .then(response => this.updateImages(response.body.message))
+      .then(response => this.setImages(response.body.message))
       .catch(console.error)
   }
 
-  updateImages(images) {
-    this.props.dispatch({
-      type: "SET_IMAGES",
-      payload: images
-    })
-  }
+
 
   render() {
-    return <DogBreedImages images={ this.state.images } breed={this.props.match.params.breed}/>
+    return <DogBreedImages images={ this.props.images } breed={this.props.match.params.breed}/>
   }
 }
 
@@ -32,4 +28,4 @@ const mapStateToProps = function (state){
   }
 }
 
-export default connect(mapStateToProps)(DogsListContainer);
+export default connect(mapStateToProps, {setImages})(DogsListContainer);
