@@ -10,7 +10,7 @@ class DogBreedImages extends React.Component {
             <div className="dog-breed-images">
                 <h1>Dogs Breed Images</h1>
     
-                This page will show images you 10 images of the {this.props.breed} breed. Study it well!
+                This page will show images you 10 images of the <b>{this.props.breed}</b> breed. Study them well!
     
                     <p><Link to="/">Go back to the index</Link></p>
                 <div >
