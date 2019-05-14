@@ -12,8 +12,8 @@ class DogBreedImages extends React.Component {
     
                 This page will show images you 10 images of the {this.props.breed} breed. Study it well!
     
-          <Link to="/"> Back to dogslist</Link>
-                <div>
+                    <p><Link to="/">Go back to the index</Link></p>
+                <div >
                     {this.props.images && this.props.images.map(url => <img src={url} alt="Dog" />)}
                     {!this.props.images && 'Loading...'}
                 </div>

@@ -11,7 +11,7 @@ class DogsListContainer extends Component {
     const breed = this.props.match.params.breed
     request
       .get(`https://dog.ceo/api/breed/${encodeURIComponent(breed)}/images`)
-      .then(response => this.setImages(response.body.message))
+      .then(response => this.props.setImages(response.body.message))
       .catch(console.error)
   }
 
@@ -23,7 +23,6 @@ class DogsListContainer extends Component {
 }
 
 const mapStateToProps = function (state){
-  console.log('lol', state)
   return {
     
     images: state.images.images
