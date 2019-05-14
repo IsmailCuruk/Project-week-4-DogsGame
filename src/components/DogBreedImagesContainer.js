@@ -23,8 +23,10 @@ class DogsListContainer extends Component {
 }
 
 const mapStateToProps = function (state){
+  console.log('lol', state)
   return {
-    images: state.images
+    
+    images: state.images.images
   }
 }
 
