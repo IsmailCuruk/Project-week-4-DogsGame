@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
+import {setBreeds} from '../actions/SET_BREEDS'
 
 class DogsList extends Component {
   renderDogBreed(breed) {
@@ -26,4 +27,7 @@ class DogsList extends Component {
   }
 }
 
-export default connect()(DogsList);
+
+
+
+export default (DogsList);

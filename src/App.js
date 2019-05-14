@@ -15,7 +15,7 @@ class App extends React.Component {
         <div className="App">
           <header className="App-header">
             <h1>
-              Exercise Week 3/ Day 3:
+              The Dogs Game
             </h1>
           </header>
           <main>

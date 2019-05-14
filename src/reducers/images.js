@@ -7,6 +7,7 @@ const initialState = {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_IMAGES:
+    // console.log()
       return {
         ...state,
         images: action.payload
