@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom'
 import React, { Component } from 'react'
-import {connect} from 'react-redux'
-import {setBreeds} from '../actions/SET_BREEDS'
+import { connect } from 'react-redux'
+import { setBreeds } from '../actions/SET_BREEDS'
 
 class DogsList extends Component {
   renderDogBreed(breed) {
     return <li key={breed}>
-    <Link to={ `/dog-breeds/${breed}` }>{breed}</Link>
-  </li>
+      <Link to={`/dog-breeds/${breed}`}>{breed}</Link>
+    </li>
   }
 
   render() {
@@ -15,12 +15,12 @@ class DogsList extends Component {
     return (
       <div className="dogs-list">
         <h1>Dogs List</h1>
-        
-        { !dogBreeds && 'Loading...' }
+
+        {!dogBreeds && 'Loading...'}
 
         {
           dogBreeds &&
-          <ul>{ dogBreeds.map(this.renderDogBreed) }</ul>
+          <ul>{dogBreeds.map(this.renderDogBreed)}</ul>
         }
       </div>
     )

@@ -1,17 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 
 class DogBreedImages extends React.Component {
-    render(){
+    render() {
 
         return (
             <div className="dog-breed-images">
                 <h1>Dogs Breed Images</h1>
-    
+
                 This page will show images you 10 images of the <b>{this.props.breed}</b> breed. Study them well!
-    
+
                     <p><Link to="/">Go back to the index</Link></p>
                 <div >
                     {this.props.images && this.props.images.map(url => <img src={url} alt="Dog" />)}

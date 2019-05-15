@@ -1,13 +1,13 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import request from 'superagent'
-import {connect} from 'react-redux'
-import {setBreeds} from '../actions/SET_BREEDS'
-import {setImages} from '../actions/SET_IMAGES'
+import { connect } from 'react-redux'
+import { setBreeds } from '../actions/SET_BREEDS'
+import { setImages } from '../actions/SET_IMAGES'
 
 import Game1Logic from './Game1Logic';
 
 
- class Game1ListContainer extends Component{
+class Game1ListContainer extends Component {
   componentDidMount() {
     request
       .get('https://dog.ceo/api/breeds/list/all')
@@ -16,20 +16,22 @@ import Game1Logic from './Game1Logic';
         return this.props.setBreeds(breeds)
       })
       .catch(console.error)
-    }
+  }
 
-    render(){
-      return (<div>
-        <p>bshjbhj</p>
-        <p>TESTING</p>
-        {this.props.dogBreeds.length === 0 ? <p>loading....</p> : <Game1Logic />}
-      </div>
-      )}}
-      const mapStateToProps = function (state){
-        return {
-          dogBreeds: state.breeds.dogBreeds,
-          images: state.images.images
-        }
-      }
-      export default connect(mapStateToProps, {setBreeds})(Game1ListContainer)
+  render() {
+    return (<div>
+      <h2>GAME 1:</h2>
+      <p>What dogbreed is the dog on the picture?</p>
+      {this.props.dogBreeds.length === 0 ? <p>loading....</p> : <Game1Logic />}
+    </div>
+    )
+  }
+}
+const mapStateToProps = function (state) {
+  return {
+    dogBreeds: state.breeds.dogBreeds,
+    images: state.images.images
+  }
+}
+export default connect(mapStateToProps, { setBreeds })(Game1ListContainer)
 
