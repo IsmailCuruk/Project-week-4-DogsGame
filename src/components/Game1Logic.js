@@ -19,14 +19,14 @@ class Game1Logic extends Component {
         const shuffledArray = this.shuffleButtons(this.props.randomDogsArray);
         this.props.setShuffledRandomDogs(shuffledArray);
         this.consoleLogMethod();
-            request
-                .get(`https://dog.ceo/api/breed/${encodeURIComponent(this.props.randomDogsArray[0])}/images/random`)
-                .then(response => {
-                    const randomImage = (response.body.message)
-                    console.log(randomImage)
-                    return this.props.setImages(randomImage)
-                })
-                .catch(console.error)
+        request
+            .get(`https://dog.ceo/api/breed/${encodeURIComponent(this.props.randomDogsArray[0])}/images/random`)
+            .then(response => {
+                const randomImage = (response.body.message)
+                console.log(randomImage)
+                return this.props.setImages(randomImage)
+            })
+            .catch(console.error)
 
     }
 
