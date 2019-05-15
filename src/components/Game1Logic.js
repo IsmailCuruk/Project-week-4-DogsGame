@@ -8,21 +8,26 @@ import { setRandomDogs } from '../actions/SET_RNDMDOGS'
 import { setShuffledRandomDogs } from '../actions/SET_SHUFFLED_DOGS'
 
 class Game1Logic extends Component {
-    state = {
-        randomImage: "",
-        randomDogsArray: [],
-        shuffledArray: [],
-    }
-
     consoleLogMethod() {
         console.log("LOG: ConsoleLogMethod", this.props.randomDogsArray, this.props.shuffledArray, this.props.randomImage)
     }
+
+
     componentDidMount() {
 
         this.setupGame();
         const shuffledArray = this.shuffleButtons(this.props.randomDogsArray);
         this.props.setShuffledRandomDogs(shuffledArray);
-        this.consoleLogMethod()
+        this.consoleLogMethod();
+            request
+                .get(`https://dog.ceo/api/breed/${encodeURIComponent(this.props.randomDogsArray[0])}/images/random`)
+                .then(response => {
+                    const randomImage = (response.body.message)
+                    console.log(randomImage)
+                    return this.props.setImages(randomImage)
+                })
+                .catch(console.error)
+
     }
 
     setupGame = () => {
@@ -72,11 +77,13 @@ class Game1Logic extends Component {
     }*/
 
     render() {
-        return (<div>
-            <img src={this.props.randomImage} alt="dog"></img>
-            {this.props.shuffledArray.map(dog => {
-                return <p><button>{dog}</button></p>
-            })} </div>
+        return (
+            <div>
+                <img src={this.props.randomImage} alt="dog"></img>
+                {this.props.shuffledArray.map(dog => {
+                    return <p><button>{dog}</button></p>
+                })}
+            </div>
 
         )
     }
