@@ -3,6 +3,7 @@ import request from 'superagent'
 import {connect} from 'react-redux'
 import {setBreeds} from '../actions/SET_BREEDS'
 import {setImages} from '../actions/SET_IMAGES'
+
 import Game1Logic from './Game1Logic';
 
 
@@ -31,3 +32,4 @@ import Game1Logic from './Game1Logic';
         }
       }
       export default connect(mapStateToProps, {setBreeds})(Game1ListContainer)
+
