@@ -1,4 +1,4 @@
-import {SET_IMAGES} from '../actions/SET_IMAGES'
+import { SET_IMAGES } from '../actions/SET_IMAGES'
 
 const initialState = {
   images: []

@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import request from 'superagent'
 import DogsList from './DogsList'
-import {connect} from 'react-redux'
-import {setBreeds} from '../actions/SET_BREEDS'
+import { connect } from 'react-redux'
+import { setBreeds } from '../actions/SET_BREEDS'
 
 
 class DogsListContainer extends Component {
@@ -22,10 +22,10 @@ class DogsListContainer extends Component {
   }
 }
 
-const mapStateToProps = function (state){
+const mapStateToProps = function (state) {
   return {
     dogBreeds: state.breeds.dogBreeds
   }
 }
 
-export default connect(mapStateToProps, {setBreeds})(DogsListContainer);
+export default connect(mapStateToProps, { setBreeds })(DogsListContainer);

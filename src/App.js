@@ -7,7 +7,7 @@ import DogBreedImagesContainer from './components/DogBreedImagesContainer';
 import { Provider } from 'react-redux';
 import { connect } from 'react-redux';
 import store from '../src/store';
-import {setBreeds} from './actions/SET_BREEDS'
+import { setBreeds } from './actions/SET_BREEDS'
 import Game1ListContainer from './components/Game1ListContainer';
 import Game1Logic from './components/Game1Logic'
 
@@ -23,9 +23,10 @@ class App extends React.Component {
       .catch(console.error)
   }
 
+
   render() {
     return (
-      // <Provider store={store}>
+      // <Provider>
         <div className="App">
           <header className="App-header">
             <h1>
@@ -43,7 +44,7 @@ class App extends React.Component {
   }
 }
 
-function mapStateToProps () {
+function mapStateToProps() {
   return {}
 }
 
