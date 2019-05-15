@@ -4,9 +4,6 @@ import DogsList from './DogsList'
 import {connect} from 'react-redux'
 import {setBreeds} from '../actions/SET_BREEDS'
 
-const sleep = time => new Promise(
-  resolve => setTimeout(() => resolve(`I waited for ${time} ms`), time)
-)
 
 class DogsListContainer extends Component {
   componentDidMount() {
