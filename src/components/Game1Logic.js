@@ -6,6 +6,9 @@ import request from 'superagent'
 import { setImages } from '../actions/SET_IMAGES'
 import { setRandomDogs } from '../actions/SET_RNDMDOGS'
 import { setShuffledRandomDogs } from '../actions/SET_SHUFFLED_DOGS'
+import { setCorrect } from '../actions/SET_CORRECT';
+import { setIncorrect } from '../actions/SET_INCORRECT';
+
 
 class Game1Logic extends Component {
     consoleLogMethod() {
@@ -14,20 +17,7 @@ class Game1Logic extends Component {
 
 
     componentDidMount() {
-
-        this.setupGame();
-        const shuffledArray = this.shuffleButtons(this.props.randomDogsArray);
-        this.props.setShuffledRandomDogs(shuffledArray);
-        this.consoleLogMethod();
-        request
-            .get(`https://dog.ceo/api/breed/${encodeURIComponent(this.props.randomDogsArray[0])}/images/random`)
-            .then(response => {
-                const randomImage = (response.body.message)
-                console.log(randomImage)
-                return this.props.setImages(randomImage)
-            })
-            .catch(console.error)
-
+        this.newQuestion()
     }
 
     setupGame = () => {
@@ -75,14 +65,40 @@ class Game1Logic extends Component {
             </div>
         )
     }*/
+    newQuestion = () => {
+        this.setupGame();
+        const shuffledArray = this.shuffleButtons(this.props.randomDogsArray);
+        this.props.setShuffledRandomDogs(shuffledArray);
+        this.consoleLogMethod();
+        request
+            .get(`https://dog.ceo/api/breed/${encodeURIComponent(this.props.randomDogsArray[0])}/images/random`)
+            .then(response => {
+                const randomImage = (response.body.message)
+                console.log(randomImage)
+                return this.props.setImages(randomImage)
+            })
+            .catch(console.error)
+    }
+
+    answer = (dog) => {
+        if (dog === this.props.randomDogsArray[0]) {
+            this.props.setCorrect()
+            setTimeout(this.newQuestion, 1000)
+        } else {
+            this.props.setIncorrect()
+            setTimeout(this.newQuestion, 2000)
+        }
+        
+    }
 
     render() {
         return (
             <div>
                 <img src={this.props.randomImage} alt="dog"></img>
                 {this.props.shuffledArray.map(dog => {
-                    return <p><button>{dog}</button></p>
+                    return <p><button onClick={() => this.answer(dog)}>{dog}</button></p>
                 })}
+                <button onClick={this.newQuestion}>Next Question!</button>
             </div>
 
         )
@@ -100,4 +116,4 @@ const mapStateToProps = function (state) {
 }
 
 
-export default connect(mapStateToProps, { setImages, setRandomDogs, setShuffledRandomDogs })(Game1Logic)
+export default connect(mapStateToProps, { setImages, setRandomDogs, setShuffledRandomDogs, setCorrect, setIncorrect })(Game1Logic)
