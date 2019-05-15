@@ -59,20 +59,14 @@ class Game1Logic extends Component {
     shuffleButtons(array) {
         return [...array].sort(() => Math.random() - 0.5);
     }
-    /*renderImage (){
-        return (
-            <div>
-                <img src= {this.state.image} alt="dog"></img>
-            </div>
-        )
-    }*/
-
+    
     newQuestion = () => {
         this.setupGame();
         this.props.toggleDisable()
         const shuffledArray = this.shuffleButtons(this.props.randomDogsArray);
         this.props.setShuffledRandomDogs(shuffledArray);
         this.consoleLogMethod();
+        this.calculateScore();
         request
             .get(`https://dog.ceo/api/breed/${encodeURIComponent(this.props.randomDogsArray[0])}/images/random`)
             .then(response => {
@@ -95,6 +89,16 @@ class Game1Logic extends Component {
         }
 
     }
+    calculateScore (){
+        if(this.props.correct === 0){
+            return  "No score yet"
+        }
+        else{
+            let totalAnswers = this.props.correct + this.props.incorrect
+            let percentage = (this.props.correct / totalAnswers) * 100 + "%"
+             return percentage
+        }
+    }
 
     render() {
         return (
@@ -115,7 +119,11 @@ class Game1Logic extends Component {
                             </p>
                         })
                 }
+              
+                   <p>{this.calculateScore()}</p>
+               
             </div>
+            
 
         )
     }
