@@ -128,6 +128,8 @@ const mapStateToProps = function (state) {
         randomDogsArray: state.breeds.threeRandomDogBreeds,
         shuffledArray: state.breeds.shuffledThreeRandomDogBreeds,
         randomImage: state.images.images,
+        correct: state.score.correct,
+        incorrect: state.score.incorrect,
         disable: state.score.disable
     }
 }
