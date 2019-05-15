@@ -75,7 +75,7 @@ class Game1Logic extends Component {
         return (<div>
             <img src={this.props.randomImage} alt="dog"></img>
             {this.props.shuffledArray.map(dog => {
-                return <button>{dog}</button>
+                return <p><button>{dog}</button></p>
             })} </div>
 
         )
