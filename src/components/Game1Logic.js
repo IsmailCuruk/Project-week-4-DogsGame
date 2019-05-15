@@ -8,6 +8,7 @@ import { setRandomDogs } from '../actions/SET_RNDMDOGS'
 import { setShuffledRandomDogs } from '../actions/SET_SHUFFLED_DOGS'
 import { setCorrect } from '../actions/SET_CORRECT';
 import { setIncorrect } from '../actions/SET_INCORRECT';
+import { toggleDisable } from '../actions/TOGGLE_DISABLE'
 
 
 class Game1Logic extends Component {
@@ -65,8 +66,10 @@ class Game1Logic extends Component {
             </div>
         )
     }*/
+
     newQuestion = () => {
         this.setupGame();
+        this.props.toggleDisable()
         const shuffledArray = this.shuffleButtons(this.props.randomDogsArray);
         this.props.setShuffledRandomDogs(shuffledArray);
         this.consoleLogMethod();
@@ -82,23 +85,36 @@ class Game1Logic extends Component {
 
     answer = (dog) => {
         if (dog === this.props.randomDogsArray[0]) {
+            this.props.toggleDisable()
             this.props.setCorrect()
             setTimeout(this.newQuestion, 1000)
         } else {
+            this.props.toggleDisable()
             this.props.setIncorrect()
             setTimeout(this.newQuestion, 2000)
         }
-        
+
     }
 
     render() {
         return (
             <div>
                 <img src={this.props.randomImage} alt="dog"></img>
-                {this.props.shuffledArray.map(dog => {
-                    return <p><button onClick={() => this.answer(dog)}>{dog}</button></p>
-                })}
-                <button onClick={this.newQuestion}>Next Question!</button>
+                {
+                    this
+                        .props
+                        .shuffledArray
+                        .map(dog => {
+                            return <p>
+                                <button
+                                    onClick={() => this.answer(dog)}
+                                    disabled={this.props.disable}
+                                >
+                                    {dog}
+                                </button>
+                            </p>
+                        })
+                }
             </div>
 
         )
@@ -111,9 +127,10 @@ const mapStateToProps = function (state) {
         dogBreeds: state.breeds.dogBreeds,
         randomDogsArray: state.breeds.threeRandomDogBreeds,
         shuffledArray: state.breeds.shuffledThreeRandomDogBreeds,
-        randomImage: state.images.images
+        randomImage: state.images.images,
+        disable: state.score.disable
     }
 }
 
 
-export default connect(mapStateToProps, { setImages, setRandomDogs, setShuffledRandomDogs, setCorrect, setIncorrect })(Game1Logic)
+export default connect(mapStateToProps, { setImages, setRandomDogs, setShuffledRandomDogs, setCorrect, setIncorrect, toggleDisable })(Game1Logic)

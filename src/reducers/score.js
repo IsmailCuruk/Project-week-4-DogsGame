@@ -1,9 +1,11 @@
 import { SET_CORRECT } from '../actions/SET_CORRECT'
 import { SET_INCORRECT } from '../actions/SET_INCORRECT'
+import { TOGGLE_DISABLE } from '../actions/TOGGLE_DISABLE'
 
 const initialState = {
   correct: 0,
-  incorrect: 0
+  incorrect: 0,
+  disable: true
 };
 
 export default function reducer(state = initialState, action) {
@@ -18,7 +20,12 @@ export default function reducer(state = initialState, action) {
         ...state,
         incorrect: state.incorrect + 1
       }
+    case TOGGLE_DISABLE:
+      return {
+        ...state,
+        disable: !state.disable
+      }
     default:
       return state
+      }
   }
-}
