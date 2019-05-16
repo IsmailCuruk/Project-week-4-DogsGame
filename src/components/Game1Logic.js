@@ -103,7 +103,7 @@ class Game1Logic extends Component {
     render() {
         return (
             <div>
-                <p><Link to="/">Go back to the index</Link></p>
+                <p><Link to="/">Go back to the homepage</Link></p>
                 <img src={this.props.randomImage} alt="dog"></img>
                 {
                     this

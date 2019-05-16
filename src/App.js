@@ -9,7 +9,9 @@ import { connect } from 'react-redux';
 import store from '../src/store';
 import { setBreeds } from './actions/SET_BREEDS'
 import Game1ListContainer from './components/Game1ListContainer';
-import Game1Logic from './components/Game1Logic'
+import Game1Logic from './components/Game1Logic';
+import HomePage from './components/HomePage';
+
 
 
 class App extends React.Component {
@@ -28,13 +30,9 @@ class App extends React.Component {
     return (
       // <Provider>
         <div className="App">
-          <header className="App-header">
-            <h1>
-              The Dogs Game
-            </h1>
-          </header>
           <main>
-            <Route exact path="/" component={DogsListContainer} />
+            <Route exact path="/" component={HomePage} />
+            <Route path="/practice" component={DogsListContainer} />
             <Route path="/dog-breeds/:breed" component={DogBreedImagesContainer} />
             <Route path="/game1" component={Game1ListContainer} />
           </main>

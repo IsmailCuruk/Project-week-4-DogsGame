@@ -1,0 +1,21 @@
+img {
+    height: 350px;
+    width: 350px;
+
+}
+body {
+  background-color: rgba(37,30,35,0.5);
+  
+}
+button{
+    background-color: #ccffff;
+    text-align: center;
+    color:#ff0066;
+    border-radius: 12px;
+    font-size: 20px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    display: block;
+}
+a {
+    text-decoration: none;
+}
