@@ -13,7 +13,7 @@ import { toggleDisable } from '../actions/TOGGLE_DISABLE'
 
 class Game2Logic extends Component {
     consoleLogMethod() {
-        console.log("3rndomDogs: ",this.props.randomDogsArray, "3rndomSHFFLDDogs: ",this.props.shuffledArray, "IMAGES: ",this.props.randomImages)
+        console.log("3rndomDogs: ", this.props.randomDogsArray, "3rndomSHFFLDDogs: ", this.props.shuffledArray, "IMAGES: ", this.props.randomImages)
     }
 
 
@@ -71,13 +71,13 @@ class Game2Logic extends Component {
 
         Promise.all(promises).then(responses => {
             const images = responses.map(response => response.body.message)
-            
+
             this.props.setImages(images)
         })
     }
 
     answer = (dog) => {
-        if (dog === this.props.randomDogsArray[0]) {
+        if (dog.includes(this.props.randomDogsArray[0]) === true) {
             this.props.toggleDisable()
             this.props.setCorrect()
             setTimeout(this.newQuestion, 1000)
@@ -105,32 +105,11 @@ class Game2Logic extends Component {
                 <p><Link to="/">Go back to the homepage</Link></p>
                 <h3> {this.props.randomDogsArray[0]} </h3>
                 <p>Progress: {this.calculateScore()}</p>
-                
-                {/* <img
-                    src={this.props.randomImages[0]}
-                    onClick={() => this.answer(dog)}
-                    disabled={this.props.disable}
-                    alt="dog">
-                </img>
-                <img
-                    src={this.props.randomImages[1]}
-                    onClick={() => this.answer(dog)}
-                    disabled={this.props.disable}
-                    alt="dog">
-                </img>
-                <img
-                    src={this.props.randomImages[2]}
-                    onClick={() => this.answer(dog)}
-                    disabled={this.props.disable}
-                    alt="dog">
-                </img> */}
                 {
                     this
                         .props
                         .randomImages
-                        .map((dog,i) => {
-                            console.log("LOL",dog)
-                            this.consoleLogMethod()
+                        .map((dog, i) => {
                             return (
                                 <img
                                     alt="dog"
