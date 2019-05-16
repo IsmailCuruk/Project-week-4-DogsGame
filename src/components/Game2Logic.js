@@ -13,7 +13,7 @@ import { toggleDisable } from '../actions/TOGGLE_DISABLE'
 
 class Game2Logic extends Component {
     consoleLogMethod() {
-        console.log("LOG: ConsoleLogMethod", this.props.randomDogsArray, this.props.shuffledArray, this.props.randomImages)
+        console.log("3rndomDogs: ",this.props.randomDogsArray, "3rndomSHFFLDDogs: ",this.props.shuffledArray, "IMAGES: ",this.props.randomImages)
     }
 
 
@@ -59,7 +59,7 @@ class Game2Logic extends Component {
     shuffleButtons(array) {
         return [...array].sort(() => Math.random() - 0.5);
     }
-    
+
     newQuestion = () => {
         this.setupGame();
         this.props.toggleDisable()
@@ -67,11 +67,11 @@ class Game2Logic extends Component {
         this.props.setShuffledRandomDogs(shuffledArray);
         this.consoleLogMethod();
         this.calculateScore();
-        const promises = this.props.randomDogsArray.map(dog => request.get(`https://dog.ceo/api/breed/${encodeURIComponent(dog)}/images/random`))
+        const promises = shuffledArray.map(dog => request.get(`https://dog.ceo/api/breed/${encodeURIComponent(dog)}/images/random`))
 
         Promise.all(promises).then(responses => {
             const images = responses.map(response => response.body.message)
-
+            
             this.props.setImages(images)
         })
     }
@@ -88,14 +88,14 @@ class Game2Logic extends Component {
         }
 
     }
-    calculateScore (){
-        if(this.props.correct === 0){
-            return  "No score yet"
+    calculateScore() {
+        if (this.props.correct === 0) {
+            return "No score yet"
         }
-        else{
+        else {
             let totalAnswers = this.props.correct + this.props.incorrect
             let percentage = (this.props.correct / totalAnswers) * 100 + "%"
-             return percentage
+            return percentage
         }
     }
 
@@ -103,29 +103,47 @@ class Game2Logic extends Component {
         return (
             <div>
                 <p><Link to="/">Go back to the homepage</Link></p>
-                <img src={this.props.randomImages[0]} alt="dog"></img>
-                <img src={this.props.randomImages[1]} alt="dog"></img>
-                <img src={this.props.randomImages[2]} alt="dog"></img>
+                <h3> {this.props.randomDogsArray[0]} </h3>
+                <p>Progress: {this.calculateScore()}</p>
+                
+                {/* <img
+                    src={this.props.randomImages[0]}
+                    onClick={() => this.answer(dog)}
+                    disabled={this.props.disable}
+                    alt="dog">
+                </img>
+                <img
+                    src={this.props.randomImages[1]}
+                    onClick={() => this.answer(dog)}
+                    disabled={this.props.disable}
+                    alt="dog">
+                </img>
+                <img
+                    src={this.props.randomImages[2]}
+                    onClick={() => this.answer(dog)}
+                    disabled={this.props.disable}
+                    alt="dog">
+                </img> */}
                 {
                     this
                         .props
-                        .shuffledArray
-                        .map(dog => {
-                            return <p>
-                                <button
+                        .randomImages
+                        .map((dog,i) => {
+                            console.log("LOL",dog)
+                            this.consoleLogMethod()
+                            return (
+                                <img
+                                    alt="dog"
+                                    src={this.props.randomImages[i]}
                                     onClick={() => this.answer(dog)}
-                                    disabled={this.props.disable}
-                                >
-                                    {dog}
-                                </button>
-                            </p>
+                                    disabled={this.props.disable}>
+                                </img>
+                            )
                         })
                 }
-              
-                   <p>{this.calculateScore()}</p>
-               
+
             </div>
-            
+
 
         )
     }
