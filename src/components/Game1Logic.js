@@ -81,11 +81,15 @@ class Game1Logic extends Component {
         if (dog === this.props.randomDogsArray[0]) {
             this.props.toggleDisable()
             this.props.setCorrect()
-            setTimeout(this.newQuestion, 1000)
+            if(this.props.currentGame !== 3){
+                setTimeout(this.newQuestion, 1000)
+            }
         } else {
             this.props.toggleDisable()
             this.props.setIncorrect()
-            setTimeout(this.newQuestion, 2000)
+            if(this.props.currentGame !== 3){
+                setTimeout(this.newQuestion, 2000)
+            }
         }
 
     }
@@ -139,7 +143,8 @@ const mapStateToProps = function (state) {
         randomImage: state.images.images,
         correct: state.score.correct,
         incorrect: state.score.incorrect,
-        disable: state.score.disable
+        disable: state.score.disable,
+        currentGame: state.score.currentGame
     }
 }
 

@@ -80,11 +80,15 @@ class Game2Logic extends Component {
         if (dog.includes(this.props.randomDogsArray[0]) === true) {
             this.props.toggleDisable()
             this.props.setCorrect()
-            setTimeout(this.newQuestion, 1000)
+            if(this.props.currentGame !== 3){
+                setTimeout(this.newQuestion, 1000)
+            }
         } else {
             this.props.toggleDisable()
             this.props.setIncorrect()
-            setTimeout(this.newQuestion, 2000)
+            if(this.props.currentGame !== 3) {
+                setTimeout(this.newQuestion, 2000)
+            }
         }
 
     }
@@ -100,15 +104,14 @@ class Game2Logic extends Component {
     }
 
     render() {
+        const { randomImages } = this.props 
         return (
             <div>
                 <p><Link to="/">Go back to the homepage</Link></p>
                 <h3> {this.props.randomDogsArray[0]} </h3>
                 <p>Progress: {this.calculateScore()}</p>
                 {
-                    this
-                        .props
-                        .randomImages
+                        Array.isArray(randomImages) && randomImages
                         .map((dog, i) => {
                             return (
                                 <img
@@ -137,7 +140,8 @@ const mapStateToProps = function (state) {
         randomImages: state.images.images,
         correct: state.score.correct,
         incorrect: state.score.incorrect,
-        disable: state.score.disable
+        disable: state.score.disable,
+        currentGame: state.score.currentGame
     }
 }
 
