@@ -59,7 +59,7 @@ class Game1Logic extends Component {
     shuffleButtons(array) {
         return [...array].sort(() => Math.random() - 0.5);
     }
-    
+
     newQuestion = () => {
         this.setupGame();
         this.props.toggleDisable()
@@ -89,14 +89,14 @@ class Game1Logic extends Component {
         }
 
     }
-    calculateScore (){
-        if(this.props.correct === 0){
-            return  "No score yet"
+    calculateScore() {
+        if (this.props.correct === 0) {
+            return "No score yet"
         }
-        else{
+        else {
             let totalAnswers = this.props.correct + this.props.incorrect
             let percentage = (this.props.correct / totalAnswers) * 100 + "%"
-             return percentage
+            return percentage
         }
     }
 
@@ -104,6 +104,7 @@ class Game1Logic extends Component {
         return (
             <div>
                 <p><Link to="/">Go back to the homepage</Link></p>
+                <p>Progress: {this.calculateScore()}</p>
                 <img src={this.props.randomImage} alt="dog"></img>
                 {
                     this
@@ -120,11 +121,10 @@ class Game1Logic extends Component {
                             </p>
                         })
                 }
-              
-                   <p>{this.calculateScore()}</p>
-               
+
+
             </div>
-            
+
 
         )
     }

@@ -30,15 +30,16 @@ class App extends React.Component {
   render() {
     return (
       // <Provider>
-        <div className="App">
-          <main>
-            <Route exact path="/" component={HomePage} />
-            <Route path="/practice" component={DogsListContainer} />
-            <Route path="/dog-breeds/:breed" component={DogBreedImagesContainer} />
-            <Route path="/game1" component={Game1ListContainer} />
-            <Route path="/game2" component={ Game2ListContainer }/>
-          </main>
-        </div>
+      <div className="App">
+        <main>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/practice" component={DogsListContainer} />
+          <Route path="/dog-breeds/:breed" component={DogBreedImagesContainer} />
+          <Route path="/game1" component={Game1ListContainer} />
+          <Route path="/game2" component={Game2ListContainer} />
+          <Route path="/game3" component={Game2ListContainer} />
+        </main>
+      </div>
       // </Provider>
     );
   }
