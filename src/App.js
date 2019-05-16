@@ -11,6 +11,7 @@ import { setBreeds } from './actions/SET_BREEDS'
 import Game1ListContainer from './components/Game1ListContainer';
 import Game1Logic from './components/Game1Logic';
 import HomePage from './components/HomePage';
+import Game2ListContainer from './components/Game2ListContainer';
 
 
 
@@ -35,6 +36,7 @@ class App extends React.Component {
             <Route path="/practice" component={DogsListContainer} />
             <Route path="/dog-breeds/:breed" component={DogBreedImagesContainer} />
             <Route path="/game1" component={Game1ListContainer} />
+            <Route path="/game2" component={ Game2ListContainer }/>
           </main>
         </div>
       // </Provider>
