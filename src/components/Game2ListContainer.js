@@ -21,8 +21,6 @@ class Game2List extends Component {
   render() {
     return (
       <div>
-        <h2>GAME 2:</h2>
-        <p> Choose the picture that corresponds with the name of the dogbreed</p>
         {this.props.dogBreeds.length === 0 ? <p>loading....</p> : <Game2Logic />}
       </div>
     )

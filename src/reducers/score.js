@@ -5,11 +5,17 @@ import { TOGGLE_DISABLE } from '../actions/TOGGLE_DISABLE'
 const initialState = {
   correct: 0,
   incorrect: 0,
-  disable: true
+  disable: true,
+  currentGame: null,
 };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    case 'CHANGE_GAME':
+    return {
+      ...state,
+      currentGame: action.payload 
+    }
     case SET_CORRECT:
       return {
         ...state,

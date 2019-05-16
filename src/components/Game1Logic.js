@@ -81,17 +81,21 @@ class Game1Logic extends Component {
         if (dog === this.props.randomDogsArray[0]) {
             this.props.toggleDisable()
             this.props.setCorrect()
-            setTimeout(this.newQuestion, 1000)
+            if(this.props.currentGame !== 3){
+                setTimeout(this.newQuestion, 1000)
+            }
         } else {
             this.props.toggleDisable()
             this.props.setIncorrect()
-            setTimeout(this.newQuestion, 2000)
+            if(this.props.currentGame !== 3){
+                setTimeout(this.newQuestion, 2000)
+            }
         }
 
     }
     calculateScore() {
         if (this.props.correct === 0) {
-            return "No score yet"
+            return "0%"
         }
         else {
             let totalAnswers = this.props.correct + this.props.incorrect
@@ -104,7 +108,9 @@ class Game1Logic extends Component {
         return (
             <div>
                 <p><Link to="/">Go back to the homepage</Link></p>
-                <p>Progress: {this.calculateScore()}</p>
+                <p className="question">What is the breed of this dog?</p>
+                <p className="score"> YOUR SCORE </p>
+                  <p className="scoreNum"> {this.calculateScore()} </p>
                 <img src={this.props.randomImage} alt="dog"></img>
                 {
                     this
@@ -122,7 +128,7 @@ class Game1Logic extends Component {
                         })
                 }
 
-
+                        
             </div>
 
 
@@ -139,7 +145,8 @@ const mapStateToProps = function (state) {
         randomImage: state.images.images,
         correct: state.score.correct,
         incorrect: state.score.incorrect,
-        disable: state.score.disable
+        disable: state.score.disable,
+        currentGame: state.score.currentGame,
     }
 }
 
