@@ -33,21 +33,26 @@ class Game3ListContainer extends Component {
     }
 
     alternateGames = () => {
-        const { incorrect, correct, dogBreeds } = this.props
+        const {
+            incorrect, 
+            correct, 
+            dogBreeds
+        } = this.props
 
         console.log(incorrect, correct, dogBreeds)
 
-        if (incorrect + correct === 0 && dogBreeds.length !== 0) {
+        const played = incorrect + correct 
+        const isOdd = played % 2 
+
+
+        if (isOdd === 0 && dogBreeds.length !== 0) {
             return <Game1Logic />
         } 
 
-        if (incorrect + correct === 1 && dogBreeds.length !== 0) {
+        if (isOdd === 1 && dogBreeds.length !== 0) {
             return <Game2Logic />
         } 
 
-        if (incorrect + correct === 2 && dogBreeds.length !== 0) {
-            return <Game1Logic />
-        } 
 
         if (dogBreeds === 0) {
             return <p>loading....</p>
@@ -60,7 +65,6 @@ class Game3ListContainer extends Component {
         return (
             <div>
                <p className="gameT"> Provide the correct answers to the alternating games</p>
-                {/* {this.props.dogBreeds.length === 0 ? <p>loading....</p> : <Game2Logic />} */}
                 {this.alternateGames()}
                 
             </div>
