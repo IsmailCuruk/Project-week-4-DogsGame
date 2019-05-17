@@ -30,7 +30,6 @@ class App extends React.Component {
 
   render() {
     return (
-      // <Provider>
       <div className="App">
         <main>
           <Route exact path="/" component={HomePage} />
@@ -41,7 +40,6 @@ class App extends React.Component {
           <Route path="/game3" component={Game3ListContainer} />
         </main>
       </div>
-      // </Provider>
     );
   }
 }

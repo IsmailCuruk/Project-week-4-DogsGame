@@ -20,8 +20,6 @@ class Game1ListContainer extends Component {
 
   render() {
     return (<div>
-      <h2>GAME 1:</h2>
-      <p>What dogbreed is the dog on the picture?</p>
       {this.props.dogBreeds.length === 0 ? <p>loading....</p> : <Game1Logic />}
     </div>
     )

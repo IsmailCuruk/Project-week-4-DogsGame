@@ -6,6 +6,10 @@ import { setImages } from '../actions/SET_IMAGES'
 import { setCorrect } from '../actions/SET_CORRECT';
 import { setIncorrect } from '../actions/SET_INCORRECT';
 
+import '../CSS/HomePage.css';
+
+
+
 import Game2Logic from './Game2Logic';
 import Game1Logic from './Game1Logic';
 
@@ -33,22 +37,29 @@ class Game3ListContainer extends Component {
     }
 
     alternateGames = () => {
-        const { incorrect, correct, dogBreeds } = this.props
+
+        const {
+            incorrect, 
+            correct, 
+            dogBreeds
+        } = this.props
 
         console.log(incorrect, correct, dogBreeds)
 
-        if (incorrect + correct === 0 && dogBreeds.length !== 0) {
+        const played = incorrect + correct 
+        const isOdd = played % 2 
+
+
+        if (isOdd === 0 && dogBreeds.length !== 0) {
             return <Game1Logic />
         } 
-        
-        if (incorrect + correct === 1 && dogBreeds.length !== 0) {
+
+        if (isOdd === 1 && dogBreeds.length !== 0) {
             return <Game2Logic />
         } 
-        
-        if (incorrect + correct === 2 && dogBreeds.length !== 0) {
-            return <Game1Logic />
-        } 
-        
+
+
+
         if (dogBreeds === 0) {
             return <p>loading....</p>
         }
@@ -59,11 +70,13 @@ class Game3ListContainer extends Component {
     render() {
         return (
             <div>
-                <h2>GAME 3:</h2>
-                <p> Provide the correct answers to the alternating games</p>
-                {/* {this.props.dogBreeds.length === 0 ? <p>loading....</p> : <Game2Logic />} */}
+
+               <p className="gameT"> Provide the correct answers to the alternating games</p>
                 {this.alternateGames()}
+                
             </div>
+           
+
         )
     }
 }
@@ -75,4 +88,7 @@ const mapStateToProps = function (state) {
         incorrect: state.score.incorrect
     }
 }
-export default connect(mapStateToProps, { setBreeds, setCorrect, setIncorrect, changeGame })(Game3ListContainer)
+
+export default connect(mapStateToProps, { setBreeds, setCorrect, setIncorrect, changeGame })(Game3ListContainer) 
+
+

@@ -94,7 +94,7 @@ class Game2Logic extends Component {
     }
     calculateScore() {
         if (this.props.correct === 0) {
-            return "No score yet"
+            return "0%"
         }
         else {
             let totalAnswers = this.props.correct + this.props.incorrect
@@ -108,10 +108,14 @@ class Game2Logic extends Component {
         return (
             <div>
                 <p><Link to="/">Go back to the homepage</Link></p>
-                <h3> {this.props.randomDogsArray[0]} </h3>
-                <p>Progress: {this.calculateScore()}</p>
+                <p className="question"> Choose the picture that corresponds with the name of the dogbreed</p>
+                <p className='score2'> YOUR SCORE </p>
+                 <p className="scoreNum2"> {this.calculateScore()} </p>
                 {
-                        Array.isArray(randomImages) && randomImages
+
+                     Array.isArray(randomImages) && randomImages
+
+
                         .map((dog, i) => {
                             return (
                                 <img
@@ -123,7 +127,7 @@ class Game2Logic extends Component {
                             )
                         })
                 }
-
+                <button className="questionBtn"> {this.props.randomDogsArray[0]} </button>
             </div>
 
 
@@ -142,6 +146,10 @@ const mapStateToProps = function (state) {
         incorrect: state.score.incorrect,
         disable: state.score.disable,
         currentGame: state.score.currentGame
+
+    
+
+
     }
 }
 

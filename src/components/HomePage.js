@@ -10,7 +10,7 @@ export default class HomePage extends React.Component {
         return (
             <div>
                 <img src={logo} alt="Game Logo"></img>
-                <h1>WhoofWhoof</h1>
+                <h1>WHOOF WHOOF</h1>
                 <div className="buttons">
                     <button><Link to="/game1">Play Game One</Link></button>
                     <button><Link to="/game2">Play Game Two</Link></button>
