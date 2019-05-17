@@ -9,57 +9,31 @@ import { setShuffledRandomDogs } from '../actions/SET_SHUFFLED_DOGS'
 import { setCorrect } from '../actions/SET_CORRECT';
 import { setIncorrect } from '../actions/SET_INCORRECT';
 import { toggleDisable } from '../actions/TOGGLE_DISABLE'
-
-
 class Game1Logic extends Component {
     consoleLogMethod() {
         console.log("LOG: ConsoleLogMethod", this.props.randomDogsArray, this.props.shuffledArray, this.props.randomImage)
     }
-
-
     componentDidMount() {
         this.newQuestion()
     }
-
     setupGame = () => {
         const dogData = this.props.dogBreeds
-        let rand = dogData[Math.floor(Math.random() * dogData.length)];
-
-        let rand2 = dogData[Math.floor(Math.random() * dogData.length)];
-
-        let rand3 = dogData[Math.floor(Math.random() * dogData.length)];
-
-        if (rand === rand2) {
-            rand2 = dogData[Math.floor(Math.random() * dogData.length)];
-        } else if (rand === rand2) {
-            rand2 = dogData[Math.floor(Math.random() * dogData.length)];
-        } else if (rand === rand2) {
-            rand2 = dogData[Math.floor(Math.random() * dogData.length)];
+        const addedAnswers = Math.floor(this.props.correct / 5) * 3;
+        const targetNumberOfAnswers = 3 + addedAnswers
+        const randomArray = []
+        console.log(randomArray);
+        while (randomArray.length < targetNumberOfAnswers) {
+            const randomBreed = dogData[Math.floor(Math.random() * dogData.length)]
+            const isInList = randomArray.indexOf(randomBreed) > -1
+            if (!isInList) {
+                randomArray.push(randomBreed)
+            }
         }
-
-        if (rand3 === rand2 || rand3 === rand) {
-            rand3 = dogData[Math.floor(Math.random() * dogData.length)];
-        } else if (rand3 === rand2 || rand3 === rand) {
-            rand3 = dogData[Math.floor(Math.random() * dogData.length)];
-        } else if (rand3 === rand2 || rand3 === rand) {
-            rand3 = dogData[Math.floor(Math.random() * dogData.length)];
-        } else if (rand3 === rand2 || rand3 === rand) {
-            rand3 = dogData[Math.floor(Math.random() * dogData.length)];
-        } else if (rand3 === rand2 || rand3 === rand) {
-            rand3 = dogData[Math.floor(Math.random() * dogData.length)];
-        } else if (rand3 === rand2 || rand3 === rand) {
-            rand3 = dogData[Math.floor(Math.random() * dogData.length)];
-        }
-        const randomArray = [rand, rand2, rand3]
-        const website = `https://dog.ceo/api/breed/${encodeURIComponent(rand)}/images/random`
-
         return this.props.randomDogsArray.splice(0, this.props.randomDogsArray.length, ...randomArray)
     }
-
     shuffleButtons(array) {
         return [...array].sort(() => Math.random() - 0.5);
     }
-
     newQuestion = () => {
         this.setupGame();
         this.props.toggleDisable()
@@ -76,22 +50,20 @@ class Game1Logic extends Component {
             })
             .catch(console.error)
     }
-
     answer = (dog) => {
         if (dog === this.props.randomDogsArray[0]) {
             this.props.toggleDisable()
             this.props.setCorrect()
-            if(this.props.currentGame !== 3){
+            if (this.props.currentGame !== 3) {
                 setTimeout(this.newQuestion, 1000)
             }
         } else {
             this.props.toggleDisable()
             this.props.setIncorrect()
-            if(this.props.currentGame !== 3){
+            if (this.props.currentGame !== 3) {
                 setTimeout(this.newQuestion, 2000)
             }
         }
-
     }
     calculateScore() {
         if (this.props.correct === 0) {
@@ -103,14 +75,13 @@ class Game1Logic extends Component {
             return Math.round(percentage) + "%"
         }
     }
-
     render() {
         return (
             <div>
                 <p><Link to="/">Go back to the homepage</Link></p>
                 <p className="question">What is the breed of this dog?</p>
                 <p className="score"> YOUR SCORE </p>
-                  <p className="scoreNum"> {this.calculateScore()} </p>
+                <p className="scoreNum"> {this.calculateScore()} </p>
                 <img src={this.props.randomImage} alt="dog"></img>
                 {
                     this
@@ -127,15 +98,10 @@ class Game1Logic extends Component {
                             </p>
                         })
                 }
-
-                        
             </div>
-
-
         )
     }
 }
-
 const mapStateToProps = function (state) {
     console.log('LOGGING THE STATE: ', state);
     return {
@@ -146,12 +112,7 @@ const mapStateToProps = function (state) {
         correct: state.score.correct,
         incorrect: state.score.incorrect,
         disable: state.score.disable,
-
         currentGame: state.score.currentGame,
-
-      
     }
 }
-
-
 export default connect(mapStateToProps, { setImages, setRandomDogs, setShuffledRandomDogs, setCorrect, setIncorrect, toggleDisable })(Game1Logic)

@@ -9,57 +9,31 @@ import { setShuffledRandomDogs } from '../actions/SET_SHUFFLED_DOGS'
 import { setCorrect } from '../actions/SET_CORRECT';
 import { setIncorrect } from '../actions/SET_INCORRECT';
 import { toggleDisable } from '../actions/TOGGLE_DISABLE'
-
-
 class Game2Logic extends Component {
     consoleLogMethod() {
-        console.log("3rndomDogs: ", this.props.randomDogsArray, "3rndomSHFFLDDogs: ", this.props.shuffledArray, "IMAGES: ", this.props.randomImages)
+        console.log("3rndomDogs: ", this.props.randomDogsArray, "3rndomSHFFLDDogs: ", this.props.shuffledArray, "IMAGES: ", this.props.randomImages,)
     }
-
-
     componentDidMount() {
         this.newQuestion()
     }
-
     setupGame = () => {
         const dogData = this.props.dogBreeds
-        let rand = dogData[Math.floor(Math.random() * dogData.length)];
-
-        let rand2 = dogData[Math.floor(Math.random() * dogData.length)];
-
-        let rand3 = dogData[Math.floor(Math.random() * dogData.length)];
-
-        if (rand === rand2) {
-            rand2 = dogData[Math.floor(Math.random() * dogData.length)];
-        } else if (rand === rand2) {
-            rand2 = dogData[Math.floor(Math.random() * dogData.length)];
-        } else if (rand === rand2) {
-            rand2 = dogData[Math.floor(Math.random() * dogData.length)];
+        
+        const addedAnswers = Math.floor(this.props.correct / 5) * 3
+        const targetNumberOfAnswers = 3 + addedAnswers
+        const randomArray = []
+        while (randomArray.length < targetNumberOfAnswers) {
+            const randomBreed = dogData[Math.floor(Math.random() * dogData.length)]
+            const isInList = randomArray.indexOf(randomBreed) > -1
+            if (!isInList) {
+                randomArray.push(randomBreed)
+            }
         }
-
-        if (rand3 === rand2 || rand3 === rand) {
-            rand3 = dogData[Math.floor(Math.random() * dogData.length)];
-        } else if (rand3 === rand2 || rand3 === rand) {
-            rand3 = dogData[Math.floor(Math.random() * dogData.length)];
-        } else if (rand3 === rand2 || rand3 === rand) {
-            rand3 = dogData[Math.floor(Math.random() * dogData.length)];
-        } else if (rand3 === rand2 || rand3 === rand) {
-            rand3 = dogData[Math.floor(Math.random() * dogData.length)];
-        } else if (rand3 === rand2 || rand3 === rand) {
-            rand3 = dogData[Math.floor(Math.random() * dogData.length)];
-        } else if (rand3 === rand2 || rand3 === rand) {
-            rand3 = dogData[Math.floor(Math.random() * dogData.length)];
-        }
-        const randomArray = [rand, rand2, rand3]
-        const website = `https://dog.ceo/api/breed/${encodeURIComponent(rand)}/images/random`
-
         return this.props.randomDogsArray.splice(0, this.props.randomDogsArray.length, ...randomArray)
     }
-
     shuffleButtons(array) {
         return [...array].sort(() => Math.random() - 0.5);
     }
-
     newQuestion = () => {
         this.setupGame();
         this.props.toggleDisable()
@@ -68,14 +42,11 @@ class Game2Logic extends Component {
         this.consoleLogMethod();
         this.calculateScore();
         const promises = shuffledArray.map(dog => request.get(`https://dog.ceo/api/breed/${encodeURIComponent(dog)}/images/random`))
-
         Promise.all(promises).then(responses => {
             const images = responses.map(response => response.body.message)
-
             this.props.setImages(images)
         })
     }
-
     answer = (dog) => {
         if (dog.includes(this.props.randomDogsArray[0]) === true) {
             this.props.toggleDisable()
@@ -90,7 +61,6 @@ class Game2Logic extends Component {
                 setTimeout(this.newQuestion, 2000)
             }
         }
-
     }
     calculateScore() {
         if (this.props.correct === 0) {
@@ -98,11 +68,10 @@ class Game2Logic extends Component {
         }
         else {
             let totalAnswers = this.props.correct + this.props.incorrect
-            let percentage = (this.props.correct / totalAnswers) * 100 
+            let percentage = (this.props.correct / totalAnswers) * 100
             return Math.round(percentage) + "%"
         }
     }
-
     render() {
         const { randomImages } = this.props 
         return (
@@ -112,10 +81,7 @@ class Game2Logic extends Component {
                 <p className='score2'> YOUR SCORE </p>
                  <p className="scoreNum2"> {this.calculateScore()} </p>
                 {
-
                      Array.isArray(randomImages) && randomImages
-
-
                         .map((dog, i) => {
                             return (
                                 <img
@@ -129,12 +95,9 @@ class Game2Logic extends Component {
                 }
                 <button className="questionBtn"> {this.props.randomDogsArray[0]} </button>
             </div>
-
-
         )
     }
 }
-
 const mapStateToProps = function (state) {
     console.log('LOGGING THE PROPS: ', state.images.images)
     return {
@@ -146,12 +109,7 @@ const mapStateToProps = function (state) {
         incorrect: state.score.incorrect,
         disable: state.score.disable,
         currentGame: state.score.currentGame
-
     
-
-
     }
 }
-
-
 export default connect(mapStateToProps, { setImages, setRandomDogs, setShuffledRandomDogs, setCorrect, setIncorrect, toggleDisable })(Game2Logic)
