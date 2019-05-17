@@ -99,8 +99,8 @@ class Game1Logic extends Component {
         }
         else {
             let totalAnswers = this.props.correct + this.props.incorrect
-            let percentage = (this.props.correct / totalAnswers) * 100 + "%"
-            return percentage
+            let percentage = (this.props.correct / totalAnswers) * 100
+            return Math.round(percentage) + "%"
         }
     }
 
