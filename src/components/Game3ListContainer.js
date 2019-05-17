@@ -5,7 +5,11 @@ import { setBreeds } from '../actions/SET_BREEDS'
 import { setImages } from '../actions/SET_IMAGES'
 import { setCorrect } from '../actions/SET_CORRECT';
 import { setIncorrect } from '../actions/SET_INCORRECT';
+
 import '../CSS/HomePage.css';
+
+
+
 import Game2Logic from './Game2Logic';
 import Game1Logic from './Game1Logic';
 
@@ -33,6 +37,7 @@ class Game3ListContainer extends Component {
     }
 
     alternateGames = () => {
+
         const {
             incorrect, 
             correct, 
@@ -54,6 +59,7 @@ class Game3ListContainer extends Component {
         } 
 
 
+
         if (dogBreeds === 0) {
             return <p>loading....</p>
         }
@@ -64,11 +70,13 @@ class Game3ListContainer extends Component {
     render() {
         return (
             <div>
+
                <p className="gameT"> Provide the correct answers to the alternating games</p>
                 {this.alternateGames()}
                 
             </div>
            
+
         )
     }
 }
@@ -80,4 +88,7 @@ const mapStateToProps = function (state) {
         incorrect: state.score.incorrect
     }
 }
+
 export default connect(mapStateToProps, { setBreeds, setCorrect, setIncorrect, changeGame })(Game3ListContainer) 
+
+

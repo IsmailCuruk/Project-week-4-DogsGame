@@ -112,7 +112,10 @@ class Game2Logic extends Component {
                 <p className='score2'> YOUR SCORE </p>
                  <p className="scoreNum2"> {this.calculateScore()} </p>
                 {
+
                      Array.isArray(randomImages) && randomImages
+
+
                         .map((dog, i) => {
                             return (
                                 <img
@@ -143,7 +146,10 @@ const mapStateToProps = function (state) {
         incorrect: state.score.incorrect,
         disable: state.score.disable,
         currentGame: state.score.currentGame
+
     
+
+
     }
 }
 

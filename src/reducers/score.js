@@ -7,6 +7,8 @@ const initialState = {
   incorrect: 0,
   disable: true,
   currentGame: null,
+
+
 };
 
 export default function reducer(state = initialState, action) {
@@ -16,6 +18,7 @@ export default function reducer(state = initialState, action) {
       ...state,
       currentGame: action.payload 
     }
+
     case SET_CORRECT:
       return {
         ...state,

@@ -146,7 +146,10 @@ const mapStateToProps = function (state) {
         correct: state.score.correct,
         incorrect: state.score.incorrect,
         disable: state.score.disable,
+
         currentGame: state.score.currentGame,
+
+      
     }
 }
 
